@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap');
+*,
+*::before,
+*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+html, body{
+    font-size: 16px;
+    height: 100%;
+}
+body{
+    color: rgb(26, 25, 25);
+    font-family: "Source Sans 3", sans-serif ;
+}
+.container{
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background-color: blueviolet;
+    background-size: cover;
+}
+.form_box{
+    width: 90%;
+    max-width: 450px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    /* transform: translate(-50%, 50%); */
+    transform: translate(-50%);
+    background-color: whitesmoke;
+    padding: 50px 60px 70px;
+    text-align: center;
+}
+.form_box h1{
+    font-size: 30px;
+    margin-bottom: 60px;
+    color: blueviolet;
+    position: relative;
+}
+.input_field{
+    background-color: #eaeaea;
+    margin: 15px 0;
+    border-radius: 3px;
+}
+input{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 18px 15px;
+}
+form p{
+    text-align: left;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+form p a{
+    text-decoration: none;
+    color: blueviolet;
+}
+.btn-field{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-field button{
+    flex-basis: 48%;
+    background-color: blueviolet;
+    color: whitesmoke;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    /* transition: background 1s; */
+}
+.input_group{
+    height: 220px;
+}
+.btn-field button.disable{
+  background-color: rgb(187, 181, 174);
+  color: blueviolet;
+}
