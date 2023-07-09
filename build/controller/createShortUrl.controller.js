@@ -24,7 +24,7 @@ function shortenUrl(req, res) {
             //get original url from request body
             const { originalURL } = req.body;
             console.log(originalURL);
-            const hostUrl = "http://localhost:3011";
+            const hostUrl = "https://altschool-capstone.onrender.com/";
             // check if url is valid
             const isValidUrl = (0, validateUrl_1.validateURL)(originalURL);
             if (isValidUrl) {

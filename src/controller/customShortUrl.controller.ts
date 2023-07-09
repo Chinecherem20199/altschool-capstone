@@ -4,7 +4,7 @@ import shortUrl from "../model/url.model";
 export async function customShortUrl(req: Request, res: Response) {
   const shortId = req.params;
   const customUrl = req.body.customUrl;
-  const hostUrl = "http://localhost:3011";
+  const hostUrl = "https://altschool-capstone.onrender.com/";
 
   console.log(shortId);
   try {

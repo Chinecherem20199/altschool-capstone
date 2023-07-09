@@ -19,7 +19,7 @@ export async function createUserUrl(req: Request, res: Response) {
 
     const userDetails = req.user ? req.user : null;
 
-    const hostUrl = "http://localhost:3011";
+    const hostUrl = "https://altschool-capstone.onrender.com/";
 
     // check if url is valid
     const isValidUrl = validateURL(originalURL);
