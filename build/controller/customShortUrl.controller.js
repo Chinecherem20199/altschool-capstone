@@ -16,15 +16,17 @@ exports.customShortUrl = void 0;
 const url_model_1 = __importDefault(require("../model/url.model"));
 function customShortUrl(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        const targetUrl = req.params;
+        const shortId = req.params;
         const customUrl = req.body.customUrl;
+        const hostUrl = "http://localhost:3011";
+        console.log(shortId);
         try {
             // search the database for target short URL data and replace with the custom url
-            const updatedShortUrl = yield url_model_1.default.findOneAndUpdate(targetUrl, { shortUrl: customUrl }, { new: true });
+            const updatedShortUrl = yield url_model_1.default.findOneAndUpdate(shortId, { shortUrl: `${hostUrl}/${customUrl}` }, { new: true });
             if (!updatedShortUrl) {
                 return res.status(404).json({ error: "Short URL not found" });
             }
-            return res.json(updatedShortUrl);
+            return res.json(updatedShortUrl.shortUrl);
         }
         catch (e) {
             console.log(e);

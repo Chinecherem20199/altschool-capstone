@@ -35,47 +35,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generateAndUploadQRCode = void 0;
-const cloudinary = __importStar(require("cloudinary"));
-const qrCode = __importStar(require("qrcode"));
-const fs_1 = require("fs");
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
-// Configure Cloudinary
-cloudinary.v2.config({
-    cloud_name: process.env.CLOUD_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET,
+const mongoose_1 = __importStar(require("mongoose"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const userSchema = new mongoose_1.Schema({
+    createdAt: { type: Date, default: Date.now },
+    first_name: { type: String, required: true },
+    last_name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    objectId: { type: mongoose_1.Schema.Types.ObjectId },
+    urls: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "ShortURL" }]
 });
-// Generate and save QR code, upload to Cloudinary, and return the secure URL
-function generateAndUploadQRCode(text) {
+userSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const qrCodeImageData = yield qrCode.toBuffer(text);
-            const outputFilePath = "qrcode.png";
-            // Save QR code buffer to file
-            yield new Promise((resolve, reject) => {
-                const fileStream = (0, fs_1.createWriteStream)(outputFilePath);
-                fileStream.write(qrCodeImageData);
-                fileStream.on("finish", resolve);
-                fileStream.on("error", reject);
-                fileStream.end();
-            });
-            // Upload QR code to Cloudinary
-            const uploadResult = yield cloudinary.v2.uploader.upload(outputFilePath, {
-                folder: "qrcodes",
-                public_id: "qrcode",
-                overwrite: true,
-                resource_type: "image",
-            });
-            console.log("QR code saved to Cloudinary:", uploadResult.secure_url);
-            // Return the secure URL of the uploaded QR code
-            return uploadResult.secure_url;
-        }
-        catch (error) {
-            console.error("QR code generation and upload failed:", error);
-            throw error;
-        }
+        const hash = yield bcrypt_1.default.hash(this.password, 10);
+        this.password = hash;
+        next();
     });
-}
-exports.generateAndUploadQRCode = generateAndUploadQRCode;
+});
+userSchema.methods.isValidPassword = function (password) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const user = this;
+        const compare = yield bcrypt_1.default.compare(password, user.password);
+        return compare;
+    });
+};
+exports.default = mongoose_1.default.model("Users", userSchema);

@@ -24,21 +24,15 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const nanoid_1 = require("nanoid");
-//generate customeID
-const nanoid = (0, nanoid_1.customAlphabet)("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz", 3);
 const urlSchema = new mongoose_1.Schema({
     originalURL: { type: String, required: true },
-    shortUrl: {
-        type: String,
-        required: true,
-        unique: true,
-        default: () => nanoid(),
-    },
+    shortUrl: { type: String, required: true, unique: true },
+    shortId: { type: String, required: true, unique: true },
     createdAt: { type: Date, default: Date.now },
     clicks: { type: Number, required: true, default: 0 },
     lastClickedAt: { type: Date },
     referringSources: [String],
+    user: { type: mongoose_1.Schema.Types.ObjectId, ref: "Users" },
 });
 const shortUrl = mongoose_1.default.model("ShortURL", urlSchema);
 exports.default = shortUrl;
