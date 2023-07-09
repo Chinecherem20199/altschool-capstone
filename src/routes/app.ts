@@ -11,7 +11,7 @@ import path from "path";
 import passport from "passport"
 
 function routes(app: Express) {
-  app.get("/", (req: Request, res: Response) => {
+  app.get("/test", (req: Request, res: Response) => {
     return res.send("Welcome to Capstone Project");
   });
    
@@ -31,8 +31,9 @@ function routes(app: Express) {
 
   // Route for serving the HTML file
   app.get('/', (req, res) => {
-    const indexPath = path.join(__dirname, '../../public/index.html');
-    res.sendFile(indexPath);
+    return res.send("Welcome to Capstone Project");
+    // const indexPath = path.join(__dirname, '../../public/index.html');
+    // res.sendFile(indexPath);
   });
   
   // Error handling
