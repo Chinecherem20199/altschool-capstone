@@ -26,8 +26,8 @@ export default function configurePassport(passport: passport.PassportStatic): vo
       { passReqToCallback: true, usernameField: "email", passwordField: "password" },
       async (req, email, password, done) => {
         try {
-          const { first_name, last_name } = req.body;
-          const user = await UserModel.create({ first_name, last_name, email, password });
+          const { firstName, lastName } = req.body;
+          const user = await UserModel.create({ firstName, lastName, email, password });
           return done(null, user);
         } catch (error) {
           console.error(error);

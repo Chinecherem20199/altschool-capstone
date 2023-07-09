@@ -6,8 +6,8 @@ export interface UserModel extends Model<UserDocument> {}
 
 export interface UserDocument extends Document {
   createdAt: Date;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   password: string;
   isValidPassword: (password: string) => Promise<boolean>;
@@ -20,9 +20,9 @@ const userSchema = new Schema<UserDocument>(
   {
     createdAt: { type: Date, default: Date.now },
 
-    first_name: { type: String, required: true },
+    firstName: { type: String, required: true },
 
-    last_name: { type: String, required: true },
+    lastName: { type: String, required: true },
 
     email: { type: String, required: true, unique: true },
 

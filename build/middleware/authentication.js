@@ -29,8 +29,8 @@ function configurePassport(passport) {
     })));
     passport.use("signup", new passport_local_1.Strategy({ passReqToCallback: true, usernameField: "email", passwordField: "password" }, (req, email, password, done) => __awaiter(this, void 0, void 0, function* () {
         try {
-            const { first_name, last_name } = req.body;
-            const user = yield user_model_1.default.create({ first_name, last_name, email, password });
+            const { firstName, lastName } = req.body;
+            const user = yield user_model_1.default.create({ firstName, lastName, email, password });
             return done(null, user);
         }
         catch (error) {
