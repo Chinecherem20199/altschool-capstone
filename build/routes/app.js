@@ -10,11 +10,10 @@ const genQrCode_controller_1 = require("../controller/genQrCode.controller");
 const customShortUrl_controller_1 = require("../controller/customShortUrl.controller");
 const getUserUrls_controller_1 = require("../controller/getUserUrls.controller");
 const createUserUrl_controller_1 = require("../controller/createUserUrl.controller");
-const path_1 = __importDefault(require("path"));
 const passport_1 = __importDefault(require("passport"));
 function routes(app) {
     app.get("/test", (req, res) => {
-        return res.send("App is okay");
+        return res.send("Welcome to Capstone Project");
     });
     //Shorten Url for Unprottected
     app.post("/Api/shorten", createShortUrl_controller_1.shortenUrl);
@@ -26,15 +25,16 @@ function routes(app) {
     app.get("/api/getallurls", passport_1.default.authenticate("jwt", { session: false }), getUserUrls_controller_1.getUserURLs);
     // Route for serving the HTML file
     app.get('/', (req, res) => {
-        const indexPath = path_1.default.join(__dirname, '../../public/index.html');
-        res.sendFile(indexPath);
+        return res.send("Welcome to Capstone Project");
+        // const indexPath = path.join(__dirname, '../../public/index.html');
+        // res.sendFile(indexPath);
     });
     // Error handling
-    app.use((err, req, res, next) => {
-        console.error("Rate limiting error:", err);
-        res
-            .status(429)
-            .json({ error: "Too many requests, please try again later." });
-    });
+    // app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+    //   console.error("Rate limiting error:", err);
+    //   res
+    //     .status(429)
+    //     .json({ error: "Too many requests, please try again later." });
+    // });
 }
 exports.default = routes;
