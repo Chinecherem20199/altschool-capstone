@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node -r esm ./build/index.js",
+    "start": "node ./build/index.js",
     "dev": "nodemon ./src/index.ts"
   },
   "repository": {
