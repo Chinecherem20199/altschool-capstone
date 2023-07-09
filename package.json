@@ -51,8 +51,8 @@
     "@types/passport-jwt": "^3.0.8",
     "@types/passport-local": "^1.0.35",
     "@types/shortid": "^0.0.29",
-    "esm": "^3.2.25"
-    
+    "esm": "^3.2.25",
+    "types": "file:../../../../nanoid"
   },
   "description": ""
 }
