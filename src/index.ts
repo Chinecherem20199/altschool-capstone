@@ -3,10 +3,19 @@ import {config} from './config/config';
 import routes from './routes/app';
 import db from './db';
 
+import configurePassport from "./middleware/authentication";
+import passport from "passport";
+import authRouter from "./routes/auth";
+
 
 const app = express();
 const PORT = config.server.port;
 app.use(express.json());
+
+app.use(passport.initialize())
+configurePassport(passport);
+
+app.use("/" , authRouter)
 
 
 app.listen(PORT, () =>{

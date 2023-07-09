@@ -1,22 +1,28 @@
 import { Request, Response } from "express";
-import { generateAndSaveQRCode } from "../utils/uploadQrCode";
+import { generateAndUploadQRCode } from "../utils/uploadQrCode";
 import shortUrl from "../model/url.model";
 
 export async function generateQrCode(req: Request, res: Response) {
   try {
-    // get shortenend url for qrcode generation
-    const desUrl = req.params;
+    // Get the shortened URL for QR code generation
+    const desUrl = req.body;
+    console.log(desUrl);
+
     const url = await shortUrl.findOne(desUrl);
 
     if (!url) {
       return res.status(404).json({ error: "URL not found" });
     }
 
-    // Extract its original url and use it to generate qrCode
+    // Extract the original URL and generate/upload the QR code
     const { originalURL } = url;
-    await generateAndSaveQRCode(originalURL);
-  } catch (e) {
-    console.log(e);
-    res.status(500).json({ e: "internal error" });
+    
+    const qrCodeUrl = await generateAndUploadQRCode(originalURL);
+   console.log(qrCodeUrl);
+    res.status(200).json({ qrCode: qrCodeUrl });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal error" });
   }
 }
