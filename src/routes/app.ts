@@ -6,13 +6,13 @@ import { generateQrCode } from "../controller/genQrCode.controller";
 import { customShortUrl } from "../controller/customShortUrl.controller";
 import { getUserURLs } from "../controller/getUserUrls.controller";
 import { createUserUrl } from "../controller/createUserUrl.controller";
-import limiter from "../middleware/rateLimiting";
+// import limiter from "../middleware/rateLimiting";
 import path from "path";
 import passport from "passport"
 
 function routes(app: Express) {
-  app.get("/test", (req: Request, res: Response) => {
-    return res.send("App is okay");
+  app.get("/", (req: Request, res: Response) => {
+    return res.send("Welcome to Capstone Project");
   });
    
   //Shorten Url for Unprottected
@@ -36,12 +36,13 @@ function routes(app: Express) {
   });
   
   // Error handling
-  app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.error("Rate limiting error:", err);
-    res
-      .status(429)
-      .json({ error: "Too many requests, please try again later." });
-  });
+  // app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  //   console.error("Rate limiting error:", err);
+  //   res
+  //     .status(429)
+  //     .json({ error: "Too many requests, please try again later." });
+  // });
+
 }
 
 export default routes;
