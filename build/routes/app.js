@@ -16,16 +16,16 @@ function routes(app) {
         return res.send("Welcome to Capstone Project");
     });
     //Shorten Url for Unprottected
-    app.post("/Api/shorten", createShortUrl_controller_1.shortenUrl);
+    app.post("/api/shorten", createShortUrl_controller_1.shortenUrl);
     //A user to have a unique url
-    app.post("/Api/shortenurl", passport_1.default.authenticate("jwt", { session: false }), createUserUrl_controller_1.createUserUrl);
+    app.post("/api/shortenurl", passport_1.default.authenticate("jwt", { session: false }), createUserUrl_controller_1.createUserUrl);
     app.get("/:url", redirect_controller_1.redirectURL);
     app.post("/api/qrcode", passport_1.default.authenticate("jwt", { session: false }), genQrCode_controller_1.generateQrCode);
     app.put("/customurl/:shortId", passport_1.default.authenticate("jwt", { session: false }), customShortUrl_controller_1.customShortUrl);
     app.get("/api/getallurls", passport_1.default.authenticate("jwt", { session: false }), getUserUrls_controller_1.getUserURLs);
     // Route for serving the HTML file
     app.get('/', (req, res) => {
-        return res.send("Welcome to Capstone Project");
+        return res.send("Welcome to Shortnenly URL Shortner");
         // const indexPath = path.join(__dirname, '../../public/index.html');
         // res.sendFile(indexPath);
     });
