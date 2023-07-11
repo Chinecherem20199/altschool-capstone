@@ -6,7 +6,7 @@ export async function redirectURL(req: Request, res: Response) {
     const { url } = req.params;
 
     //find corresponding original url from database
-    const hostUrl = "https://altschool-capstone.onrender.com/"
+    const hostUrl = "https://altschool-capstone.onrender.com"
     let shortenedUrl = await ShortURL.findOne({ shortUrl:`${hostUrl}/${url}` });
 
     if (!shortenedUrl) {

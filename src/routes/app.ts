@@ -16,10 +16,10 @@ function routes(app: Express) {
   });
    
   //Shorten Url for Unprottected
-  app.post("/Api/shorten", shortenUrl);
+  app.post("/api/shorten", shortenUrl);
 
   //A user to have a unique url
-  app.post("/Api/shortenurl", passport.authenticate("jwt", { session: false }), createUserUrl);
+  app.post("/api/shortenurl", passport.authenticate("jwt", { session: false }), createUserUrl);
 
   app.get("/:url", redirectURL);
 
@@ -31,7 +31,7 @@ function routes(app: Express) {
 
   // Route for serving the HTML file
   app.get('/', (req, res) => {
-    return res.send("Welcome to Capstone Project");
+    return res.send("Welcome to Shortnenly URL Shortner");
     // const indexPath = path.join(__dirname, '../../public/index.html');
     // res.sendFile(indexPath);
   });
