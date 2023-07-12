@@ -20,14 +20,14 @@ const authRouter = express_1.default.Router();
 // Signup route
 authRouter.post("/signup", (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { first_name, last_name, email, password } = req.body;
+        const { firstName, lastName, email, password } = req.body;
         // Check if the user already exists
         const existingUser = yield user_model_1.default.findOne({ email });
         if (existingUser) {
             return res.status(409).json({ message: "User already exists" });
         }
         // Create a new user
-        const newUser = new user_model_1.default({ first_name, last_name, email, password });
+        const newUser = new user_model_1.default({ firstName, lastName, email, password });
         yield newUser.save();
         res.status(201).json({ message: "User created successfully" });
     }

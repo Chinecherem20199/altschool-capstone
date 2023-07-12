@@ -8,7 +8,7 @@ const authRouter = express.Router();
 // Signup route
 authRouter.post("/signup", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { first_name, last_name, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     // Check if the user already exists
     const existingUser = await userModel.findOne({ email });
@@ -17,7 +17,7 @@ authRouter.post("/signup", async (req: Request, res: Response, next: NextFunctio
     }
 
     // Create a new user
-    const newUser = new userModel({ first_name, last_name, email, password });
+    const newUser = new userModel({ firstName, lastName, email, password });
     await newUser.save();
 
     res.status(201).json({ message: "User created successfully" });
