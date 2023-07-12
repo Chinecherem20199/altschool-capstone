@@ -19,7 +19,7 @@ export async function createUserUrl(req: Request, res: Response) {
 
     const userDetails = req.user ? req.user : null;
 
-    const hostUrl = "https://altschool-capstone.onrender.com/";
+    const hostUrl = "https://altschool-capstone.onrender.com";
 
     // check if url is valid
     const isValidUrl = validateURL(originalURL);
@@ -39,7 +39,7 @@ export async function createUserUrl(req: Request, res: Response) {
         await user.save();
       }
 
-      return res.send(completeUrl);
+      return res.send({completeUrl: `https://altschool-capstone.onrender.com/${shortId}`});
     }
     res.send("Invalid URL");
   } catch (e) {

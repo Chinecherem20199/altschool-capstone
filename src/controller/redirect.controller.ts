@@ -12,13 +12,13 @@ export async function redirectURL(req: Request, res: Response) {
     if (!shortenedUrl) {
       return res.status(404).json({ error: "Short URL not found" });
     }
-    // capture the referring source if available
+    // checking if referring source if available
     const referringSource = req.headers.referer || "Direct";
 
     // push the referring source to the array
     shortenedUrl.referringSources.push(referringSource);
 
-    // Update the click count and last clicked time
+    // Update the click by count and last clicked time
     shortenedUrl.clicks = Number(shortenedUrl.clicks) + 1;
     shortenedUrl.lastClickedAt = new Date();
     await shortenedUrl.save();
