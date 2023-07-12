@@ -26,7 +26,7 @@ function createUserUrl(req, res) {
             const { originalURL } = req.body;
             console.log(originalURL);
             const userDetails = req.user ? req.user : null;
-            const hostUrl = "https://altschool-capstone.onrender.com/";
+            const hostUrl = "https://altschool-capstone.onrender.com";
             // check if url is valid
             const isValidUrl = (0, validateUrl_1.validateURL)(originalURL);
             if (isValidUrl) {
@@ -42,7 +42,7 @@ function createUserUrl(req, res) {
                     user.urls.push(shortenedUrl._id);
                     yield user.save();
                 }
-                return res.send(completeUrl);
+                return res.send({ completeUrl: `https://altschool-capstone.onrender.com/${shortId}` });
             }
             res.send("Invalid URL");
         }

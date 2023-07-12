@@ -18,7 +18,7 @@ function customShortUrl(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const shortId = req.params;
         const customUrl = req.body.customUrl;
-        const hostUrl = "https://altschool-capstone.onrender.com/";
+        const hostUrl = "https://altschool-capstone.onrender.com";
         console.log(shortId);
         try {
             // search the database for target short URL data and replace with the custom url
