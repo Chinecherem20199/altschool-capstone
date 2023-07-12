@@ -14,7 +14,7 @@ export async function shortenUrl(req: Request, res: Response) {
     //get original url from request body
     const { originalURL } = req.body;
     console.log(originalURL);
-    const hostUrl = "https://altschool-capstone.onrender.com/";
+    const hostUrl = "https://altschool-capstone.onrender.com";
 
     // check if url is valid
     const isValidUrl = validateURL(originalURL);
@@ -25,8 +25,8 @@ export async function shortenUrl(req: Request, res: Response) {
       const completeUrl = `${hostUrl}/${shortid}`;
       const shortenedUrl = new ShortURL({ originalURL, shortUrl: completeUrl, "shortId": shortid});
       await shortenedUrl.save();
-
-      return res.send(completeUrl);
+      return res.json({completeUrl:`https://altschool-capstone.onrender.com/${shortid}` });
+      // return res.send(completeUrl);
     }
     res.send("Invalid URL");
   } catch (e) {

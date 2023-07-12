@@ -24,7 +24,7 @@ function shortenUrl(req, res) {
             //get original url from request body
             const { originalURL } = req.body;
             console.log(originalURL);
-            const hostUrl = "https://altschool-capstone.onrender.com/";
+            const hostUrl = "https://altschool-capstone.onrender.com";
             // check if url is valid
             const isValidUrl = (0, validateUrl_1.validateURL)(originalURL);
             if (isValidUrl) {
@@ -33,7 +33,8 @@ function shortenUrl(req, res) {
                 const completeUrl = `${hostUrl}/${shortid}`;
                 const shortenedUrl = new url_model_1.default({ originalURL, shortUrl: completeUrl, "shortId": shortid });
                 yield shortenedUrl.save();
-                return res.send(completeUrl);
+                return res.json({ completeUrl: `https://altschool-capstone.onrender.com/${shortid}` });
+                // return res.send(completeUrl);
             }
             res.send("Invalid URL");
         }
